@@ -41,14 +41,7 @@ stages:
         workingDirectory: '$(System.DefaultWorkingDirectory)/v-net'
         environmentServiceNameAzureRM: 'Azureportal-devops-sc'
    
-    # - task: TerraformTaskV4@4
-    #   displayName: Terraform Destroy
-    #   inputs:
-    #     provider: 'azurerm'
-    #     command: 'destroy'
-    #     workingDirectory: '$(System.DefaultWorkingDirectory)/v-net'
-    #     environmentServiceNameAzureRM: 'Azureportal-devops-sc'
-        
+
 - stage: create_vm
   dependsOn: create_vnet
   jobs:
