@@ -64,7 +64,7 @@ stages:
           backendAzureRmResourceGroupName: 'rg-tfstate'
           backendAzureRmStorageAccountName: 'sgtfstatefile'
           backendAzureRmContainerName: 'mytfstate'
-          backendAzureRmKey: 'vnet1.tfstate'
+          backendAzureRmKey: 'vm.tfstate'
      
       - task: TerraformTaskV4@4
         displayName: Terraform apply_vm
