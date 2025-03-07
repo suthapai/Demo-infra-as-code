@@ -69,10 +69,7 @@ stages:
           backendAzureRmStorageAccountName: 'sgtfstatefile'
           backendAzureRmContainerName: 'mytfstate'
           backendAzureRmKey: 'vnet1.tfstate'
-      - script: |
-          sed -i 's/\r$//' script.sh
-          displayName: 'Fix line endings'
-          workingDirectory: '$(System.DefaultWorkingDirectory)/agent-vm'
+     
       - task: TerraformTaskV4@4
         displayName: Terraform apply_vm
         inputs:
