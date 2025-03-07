@@ -6,6 +6,7 @@ resources:
     name: suthapai/Demo-infra-as-code
 variables:
   - group: vnet-variables
+  - group: vm-variables
 trigger: none
 
 pool:
