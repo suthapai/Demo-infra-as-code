@@ -49,6 +49,7 @@ stages:
 #         environmentServiceNameAzureRM: 'Azureportal-devops-sc'
         
 - stage: create_vm
+  dependsOn: create_vnet
   jobs:
   - job: create_vm_agent_pool
     displayName: CreateVM
@@ -68,6 +69,10 @@ stages:
           backendAzureRmStorageAccountName: 'sgtfstatefile'
           backendAzureRmContainerName: 'mytfstate'
           backendAzureRmKey: 'vnet1.tfstate'
+      - script: |
+          sed -i 's/\r$//' script.sh
+          displayName: 'Fix line endings'
+          workingDirectory: '$(Build.SourcesDirectory)/agent-vm'
       - task: TerraformTaskV4@4
         displayName: Terraform apply_vm
         inputs:
