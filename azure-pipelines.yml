@@ -29,12 +29,13 @@ stages:
         backendAzureRmStorageAccountName: 'sgtfstatefile'
         backendAzureRmContainerName: 'mytfstate'
         backendAzureRmKey: 'vnet1.tfstate'
+   
     - task: TerraformTaskV4@4
-      displayName: Terraform Apply
+      displayName: Terraform Destroy
       inputs:
         provider: 'azurerm'
-        command: 'apply'
-        commandOptions: '-auto-approve'
+        command: 'destroy'
         workingDirectory: '$(System.DefaultWorkingDirectory)/v-net'
         environmentServiceNameAzureRM: 'Azureportal-devops-sc'
-  
+        
+      
