@@ -1,6 +1,6 @@
 ### Retrive Resource group
 data "azurerm_resource_group" "rg-devops" {
-  name = "rg-devops"
+  name = "myresourcegroup"
 }
 ### Retrive subnet info
 data "azurerm_subnet" "agent-subnet" {
