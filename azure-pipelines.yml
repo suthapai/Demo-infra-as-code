@@ -7,7 +7,9 @@ resources:
 variables:
   - group: vnet-variables
   - group: vm-variables
-trigger: none
+trigger: 
+ - main
+   
 
 pool:
   vmImage: ubuntu-latest
