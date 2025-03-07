@@ -33,48 +33,48 @@ stages:
         backendAzureRmStorageAccountName: 'sgtfstatefile'
         backendAzureRmContainerName: 'mytfstate'
         backendAzureRmKey: 'vnet1.tfstate'
+    # - task: TerraformTaskV4@4
+    #   displayName: Terraform Apply_vnet
+    #   inputs:
+    #     provider: 'azurerm'
+    #     command: 'apply'
+    #     workingDirectory: '$(System.DefaultWorkingDirectory)/v-net'
+    #     environmentServiceNameAzureRM: 'Azureportal-devops-sc'
+   
     - task: TerraformTaskV4@4
-      displayName: Terraform Apply_vnet
+      displayName: Terraform Destroy
       inputs:
         provider: 'azurerm'
-        command: 'apply'
+        command: 'destroy'
         workingDirectory: '$(System.DefaultWorkingDirectory)/v-net'
         environmentServiceNameAzureRM: 'Azureportal-devops-sc'
-   
-#     - task: TerraformTaskV4@4
-#       displayName: Terraform Destroy
-#       inputs:
-#         provider: 'azurerm'
-#         command: 'destroy'
-#         workingDirectory: '$(System.DefaultWorkingDirectory)/v-net'
-#         environmentServiceNameAzureRM: 'Azureportal-devops-sc'
         
-- stage: create_vm
-  dependsOn: create_vnet
-  jobs:
-  - job: create_vm_agent_pool
-    displayName: CreateVM
-    steps:
-      - checkout: MyGitHubRepo
-      - task: TerraformInstaller@1
-        inputs:
-         terraformVersion: 'latest'
-      - task: TerraformTaskV4@4
-        displayName: Terraform init_vm
-        inputs:
-          provider: 'azurerm'
-          command: 'init'
-          workingDirectory: '$(System.DefaultWorkingDirectory)/agent-vm'
-          backendServiceArm: 'Azureportal-devops-sc'
-          backendAzureRmResourceGroupName: 'rg-tfstate'
-          backendAzureRmStorageAccountName: 'sgtfstatefile'
-          backendAzureRmContainerName: 'mytfstate'
-          backendAzureRmKey: 'vnet1.tfstate'
+# - stage: create_vm
+#   dependsOn: create_vnet
+#   jobs:
+#   - job: create_vm_agent_pool
+#     displayName: CreateVM
+#     steps:
+#       - checkout: MyGitHubRepo
+#       - task: TerraformInstaller@1
+#         inputs:
+#          terraformVersion: 'latest'
+#       - task: TerraformTaskV4@4
+#         displayName: Terraform init_vm
+#         inputs:
+#           provider: 'azurerm'
+#           command: 'init'
+#           workingDirectory: '$(System.DefaultWorkingDirectory)/agent-vm'
+#           backendServiceArm: 'Azureportal-devops-sc'
+#           backendAzureRmResourceGroupName: 'rg-tfstate'
+#           backendAzureRmStorageAccountName: 'sgtfstatefile'
+#           backendAzureRmContainerName: 'mytfstate'
+#           backendAzureRmKey: 'vnet1.tfstate'
      
-      - task: TerraformTaskV4@4
-        displayName: Terraform apply_vm
-        inputs:
-          provider: 'azurerm'
-          command: 'apply'
-          environmentServiceNameAzureRM: 'Azureportal-devops-sc'
-          workingDirectory: '$(System.DefaultWorkingDirectory)/agent-vm'
+#       - task: TerraformTaskV4@4
+#         displayName: Terraform apply_vm
+#         inputs:
+#           provider: 'azurerm'
+#           command: 'apply'
+#           environmentServiceNameAzureRM: 'Azureportal-devops-sc'
+#           workingDirectory: '$(System.DefaultWorkingDirectory)/agent-vm'
