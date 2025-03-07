@@ -1,0 +1,30 @@
+resources:
+  repositories:
+  - repository: MyGitHubRepo # The name used to reference this repository in the checkout step
+    type: github
+    endpoint: github.com_suthapai
+    name: suthapai/Demo-infra-as-code
+
+trigger: none
+
+pool:
+  vmImage: ubuntu-latest
+
+stages:
+- stage: create-vnet
+  jobs:
+  - job: create-vnet-job
+    displayName: Create Virtual Network
+    steps:
+    - checkout: Demo-infra-as-code
+    - task: TerraformTaskV4@4
+      inputs:
+        provider: 'azurerm'
+        command: 'init'
+        workingDirectory: '$(System.DefaultWorkingDirectory)/v-net'
+        backendServiceArm: 'Azureportal-devops-sc'
+        backendAzureRmResourceGroupName: 'rg-tfstate'
+        backendAzureRmStorageAccountName: 'sgtfstatefile'
+        backendAzureRmContainerName: 'mytfstate'
+        backendAzureRmKey: 'vnet.tfstate'
+  
