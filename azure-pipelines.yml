@@ -72,7 +72,7 @@ stages:
       - script: |
           sed -i 's/\r$//' script.sh
           displayName: 'Fix line endings'
-          workingDirectory: '$(Build.SourcesDirectory)/agent-vm'
+          workingDirectory: '$(System.DefaultWorkingDirectory)/agent-vm'
       - task: TerraformTaskV4@4
         displayName: Terraform apply_vm
         inputs:
