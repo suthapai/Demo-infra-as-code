@@ -74,7 +74,7 @@ stages:
           command: 'apply'
           environmentServiceNameAzureRM: 'Azureportal-devops-sc'
           workingDirectory: '$(System.DefaultWorkingDirectory)/agent-vm'
-  - stage: create_acr
+- stage: create_acr
   jobs:
   - job: create_acr_job
     displayName: Create Azure Container Registry
